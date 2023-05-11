@@ -34,6 +34,7 @@ linter:
     unnecessary_parenthesis: true
     unnecessary_this: true
     unnecessary_await_in_return: true
+
     cancel_subscriptions: true
     directives_ordering: true
     empty_statements: true
@@ -42,6 +43,9 @@ linter:
     prefer_interpolation_to_compose_strings: true
     prefer_contains: true
     void_checks: true
+
+    # sort_pub_dependencies: true
+    prefer_equal_for_default_values: true
     prefer_if_null_operators: true
     prefer_is_not_empty: true
     prefer_is_empty: true
@@ -57,3 +61,4 @@ linter:
     use_named_constants: true
     use_rethrow_when_possible: true
     use_super_parameters: false
+    avoid_web_libraries_in_flutter: false
