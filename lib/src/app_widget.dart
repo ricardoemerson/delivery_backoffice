@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import 'core/theme/app_theme.dart';
+
 class AppWidget extends StatelessWidget {
   const AppWidget({super.key});
 
@@ -8,7 +10,7 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'App',
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: AppTheme.theme,
       routeInformationParser: Modular.routeInformationParser,
       routerDelegate: Modular.routerDelegate,
       debugShowCheckedModeBanner: false,

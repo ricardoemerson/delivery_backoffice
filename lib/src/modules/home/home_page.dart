@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> with LoaderMixin, MessageMixin {
         centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(20.0),
         child: Center(
           child: Column(
             children: [
@@ -44,7 +44,13 @@ class _HomePageState extends State<HomePage> with LoaderMixin, MessageMixin {
                   showError('Teste de error');
                 },
                 child: const Text('Show Message'),
-              )
+              ),
+              const SizedBox(height: 20),
+              TextFormField(
+                decoration: const InputDecoration(
+                  label: Text('Login'),
+                ),
+              ),
             ],
           ),
         ),
