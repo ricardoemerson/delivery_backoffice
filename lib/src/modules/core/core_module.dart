@@ -8,6 +8,6 @@ class CoreModule extends Module {
   @override
   List<Bind> get binds => [
         Bind.lazySingleton<IStorage>((i) => SessionStorage(), export: true),
-        Bind.lazySingleton((i) => RestClient(), export: true),
+        Bind.lazySingleton((i) => RestClient(storage: i()), export: true),
       ];
 }
