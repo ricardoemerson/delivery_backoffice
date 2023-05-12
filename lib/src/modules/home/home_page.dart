@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/env/env.dart';
 import '../../core/helpers/loader_mixin.dart';
 import '../../core/helpers/message_mixin.dart';
+import '../base_layout/base_layout_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,11 +15,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with LoaderMixin, MessageMixin {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('HomePage'),
-        centerTitle: true,
-      ),
+    return BaseLayoutPage(
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Center(
