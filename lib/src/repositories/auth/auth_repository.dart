@@ -11,7 +11,9 @@ import 'i_auth_repository.dart';
 class AuthRepository implements IAuthRepository {
   final RestClient _restClient;
 
-  AuthRepository(this._restClient);
+  AuthRepository({
+    required RestClient restClient,
+  }) : _restClient = restClient;
 
   @override
   Future<AuthModel> login(String email, String password) async {
@@ -27,7 +29,7 @@ class AuthRepository implements IAuthRepository {
 
       return AuthModel.fromMap(result.data);
     } on DioError catch (err, s) {
-      if (err.response?.statusCode == 401) {
+      if (err.response?.statusCode == 403) {
         log('Login ou senha inválidos', error: err, stackTrace: s);
 
         throw UnauthorizedException('Login ou senha inválidos.');

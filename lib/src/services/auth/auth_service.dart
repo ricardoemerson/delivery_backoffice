@@ -7,7 +7,11 @@ class AuthService implements IAuthService {
   final IAuthRepository _authRepository;
   final IStorage _storage;
 
-  AuthService(this._authRepository, this._storage);
+  AuthService({
+    required IAuthRepository authRepository,
+    required IStorage storage,
+  })  : _authRepository = authRepository,
+        _storage = storage;
 
   @override
   Future<void> login(String email, String password) async {

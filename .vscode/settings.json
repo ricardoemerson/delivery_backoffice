@@ -7,5 +7,7 @@
   // Remove from file watching
   "files.watcherExclude": {
     "**/.fvm": true
-  }
+  },
+  "flutterTools.getxDisplayContextMenu": false,
+  "flutterTools.mobxDisplayContextMenu": true,
 }
