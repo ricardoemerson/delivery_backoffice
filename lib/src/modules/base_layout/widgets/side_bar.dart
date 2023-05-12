@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../core/enums/menu_enum.dart';
 import '../../../core/extensions/size_extension.dart';
@@ -50,6 +51,7 @@ class _SideBarState extends State<SideBar> {
                 onPressed: (value) {
                   setState(() {
                     selectedMenu = value;
+                    Modular.to.navigate(value.route);
                   });
                 },
               );

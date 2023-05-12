@@ -42,7 +42,7 @@ class _LoginPageState extends State<LoginPage> with LoaderMixin, MessageMixin {
             break;
           case LoginStateStatusEnum.success:
             hideLoader();
-            Modular.to.navigate('/home');
+            Modular.to.navigate('/');
             break;
           case LoginStateStatusEnum.error:
             hideLoader();
