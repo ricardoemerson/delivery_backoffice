@@ -35,7 +35,7 @@ class AuthRepository implements IAuthRepository {
         throw UnauthorizedException('Login ou senha inválidos.');
       }
 
-      log('Erro ao realizar login', error: err, stackTrace: s);
+      log('Erro ao realizar login.', error: err, stackTrace: s);
       throw RepositoryException('Erro ao realizar login.');
     }
   }
