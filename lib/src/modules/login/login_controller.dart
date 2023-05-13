@@ -19,13 +19,11 @@ abstract class LoginControllerBase with Store {
   @readonly
   String? _errorMessage;
 
-  LoginStateStatusEnum get loginStatus => _loginStatus;
-  String? get errorMessage => _errorMessage;
-
   LoginControllerBase({
     required IAuthService authService,
   }) : _authService = authService;
 
+  @action
   Future<void> login(String email, String password) async {
     try {
       _loginStatus = LoginStateStatusEnum.loading;

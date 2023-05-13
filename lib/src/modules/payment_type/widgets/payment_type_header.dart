@@ -7,9 +7,18 @@ class PaymentTypeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const BaseHeader(
+    return BaseHeader(
       title: 'ADMINISTRAR FORMAS DE PAGAMENTO',
       buttonLabel: 'Adicionar',
+      filterWidget: DropdownButton<bool>(
+        onChanged: (value) {},
+        value: true,
+        items: const [
+          DropdownMenuItem(child: Text('Todos')),
+          DropdownMenuItem(value: true, child: Text('Ativos')),
+          DropdownMenuItem(value: false, child: Text('Inativos')),
+        ],
+      ),
     );
   }
 }
