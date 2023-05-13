@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 
+import 'widgets/payment_type_header.dart';
+
 class PaymentTypePage extends StatelessWidget {
   const PaymentTypePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('PaymentTypePage'),
-        centerTitle: true,
-      ),
-      body: const Center(
-        child: Text(
-          'PaymentTypePage is working',
-          style: TextStyle(fontSize: 20),
-        ),
+    return const Scaffold(
+      body: Column(
+        children: [
+          PaymentTypeHeader(),
+        ],
       ),
     );
   }
