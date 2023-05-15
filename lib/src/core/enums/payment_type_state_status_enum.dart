@@ -2,5 +2,7 @@ enum PaymentTypeStateStatusEnum {
   initial,
   loading,
   loaded,
-  error;
+  error,
+  addOrUpdatePayment,
+  saved;
 }

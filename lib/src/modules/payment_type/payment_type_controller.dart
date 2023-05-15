@@ -23,16 +23,24 @@ abstract class PaymentTypeControllerBase with Store {
   @readonly
   var _paymentTypes = <PaymentTypeModel>[];
 
+  @readonly
+  PaymentTypeModel? _selectedPaymentType;
+
+  @readonly
+  bool? _filterEnabled;
+
   PaymentTypeControllerBase({
     required IPaymentTypeService paymentTypeService,
   }) : _paymentTypeService = paymentTypeService;
+
+  void changeFilter(bool? enabled) => _filterEnabled = enabled;
 
   @action
   Future<void> loadPayments() async {
     try {
       _status = PaymentTypeStateStatusEnum.loading;
 
-      _paymentTypes = await _paymentTypeService.findAll(true);
+      _paymentTypes = await _paymentTypeService.findAll(_filterEnabled);
 
       _status = PaymentTypeStateStatusEnum.loaded;
     } on RepositoryException catch (err, s) {
@@ -41,5 +49,48 @@ abstract class PaymentTypeControllerBase with Store {
       _status = PaymentTypeStateStatusEnum.error;
       _errorMessage = 'Erro ao carregar as formas de pagamento.';
     }
+  }
+
+  @action
+  Future<void> addPayment() async {
+    _status = PaymentTypeStateStatusEnum.loading;
+
+    await Future.delayed(Duration.zero);
+
+    _selectedPaymentType = null;
+
+    _status = PaymentTypeStateStatusEnum.addOrUpdatePayment;
+  }
+
+  @action
+  Future<void> editPayment(PaymentTypeModel paymentType) async {
+    _status = PaymentTypeStateStatusEnum.loading;
+
+    await Future.delayed(Duration.zero);
+
+    _selectedPaymentType = paymentType;
+
+    _status = PaymentTypeStateStatusEnum.addOrUpdatePayment;
+  }
+
+  @action
+  Future<void> savePayment({
+    int? id,
+    required String name,
+    required String acronym,
+    required bool enabled,
+  }) async {
+    _status = PaymentTypeStateStatusEnum.loading;
+
+    final paymentType = PaymentTypeModel(
+      id: id,
+      name: name,
+      acronym: acronym,
+      enabled: enabled,
+    );
+
+    await _paymentTypeService.save(paymentType);
+
+    _status = PaymentTypeStateStatusEnum.saved;
   }
 }

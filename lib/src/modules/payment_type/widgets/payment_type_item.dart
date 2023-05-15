@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/extensions/app_colors_extension.dart';
 import '../../../core/extensions/app_text_styles_extension.dart';
 import '../../../models/payment_type_model.dart';
+import '../payment_type_controller.dart';
 
 class PaymentTypeItem extends StatelessWidget {
   final PaymentTypeModel paymentType;
+  final PaymentTypeController controller;
 
   const PaymentTypeItem({
     super.key,
     required this.paymentType,
+    required this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
+    final enabledColor = paymentType.enabled ? Colors.black : Colors.grey;
+
     return DecoratedBox(
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey),
@@ -25,32 +31,47 @@ class PaymentTypeItem extends StatelessWidget {
             Image.asset(
               'assets/images/icons/payment_${paymentType.acronym}_icon.png',
               errorBuilder: (context, error, stackTrace) {
-                return Image.asset('assets/images/icons/payment_notfound_icon.png');
+                return Image.asset(
+                  'assets/images/icons/payment_notfound_icon.png',
+                  color: enabledColor,
+                );
               },
+              color: enabledColor,
             ),
             const SizedBox(width: 20),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Forma de Pagamento',
-                  style: context.textStyles.textRegular,
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  paymentType.name,
-                  style: context.textStyles.textTitle,
-                ),
-              ],
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  FittedBox(
+                    child: Text(
+                      'Forma de Pagamento',
+                      style: context.textStyles.textRegular.copyWith(color: enabledColor),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  FittedBox(
+                    child: Text(
+                      paymentType.name,
+                      style: context.textStyles.textTitle.copyWith(color: enabledColor),
+                    ),
+                  ),
+                ],
+              ),
             ),
             Expanded(
               child: Align(
                 alignment: Alignment.bottomRight,
                 child: TextButton(
-                  onPressed: () {},
-                  child: const Text('Editar'),
+                  onPressed: () => controller.editPayment(paymentType),
+                  child: Text(
+                    'Editar',
+                    style: context.textStyles.textMedium.copyWith(
+                      color: paymentType.enabled ? context.colors.primary : Colors.grey,
+                    ),
+                  ),
                 ),
               ),
             )
