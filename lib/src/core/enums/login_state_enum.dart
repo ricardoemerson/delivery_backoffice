@@ -1,4 +1,4 @@
-enum LoginStateStatusEnum {
+enum LoginStateEnum {
   initial,
   loading,
   success,

@@ -1,4 +1,4 @@
-enum PaymentTypeStateStatusEnum {
+enum PaymentTypeStateEnum {
   initial,
   loading,
   loaded,

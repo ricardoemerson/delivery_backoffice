@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:mobx/mobx.dart';
 
-import '../../core/enums/login_state_status_enum.dart';
+import '../../core/enums/login_state_enum.dart';
 import '../../core/exceptions/unauthorized_exception.dart';
 import '../../services/auth/i_auth_service.dart';
 
@@ -14,7 +14,7 @@ abstract class LoginControllerBase with Store {
   final IAuthService _authService;
 
   @readonly
-  var _loginStatus = LoginStateStatusEnum.initial;
+  var _loginState = LoginStateEnum.initial;
 
   @readonly
   String? _errorMessage;
@@ -26,19 +26,19 @@ abstract class LoginControllerBase with Store {
   @action
   Future<void> login(String email, String password) async {
     try {
-      _loginStatus = LoginStateStatusEnum.loading;
+      _loginState = LoginStateEnum.loading;
 
       await _authService.login(email, password);
 
-      _loginStatus = LoginStateStatusEnum.success;
+      _loginState = LoginStateEnum.success;
     } on UnauthorizedException {
       _errorMessage = 'Login ou senha inválidos.';
-      _loginStatus = LoginStateStatusEnum.error;
+      _loginState = LoginStateEnum.error;
     } catch (err, s) {
       log('Erro ao realizar login.', error: err, stackTrace: s);
 
       _errorMessage = 'Não foi possível realizar sua autenticação, tente novamente mais tarde.';
-      _loginStatus = LoginStateStatusEnum.error;
+      _loginState = LoginStateEnum.error;
     }
   }
 }

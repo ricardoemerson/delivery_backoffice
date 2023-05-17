@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:mobx/mobx.dart';
 
-import '../../core/enums/payment_type_state_status_enum.dart';
+import '../../core/enums/payment_type_state_enum.dart';
 import '../../core/exceptions/repository_exception.dart';
 import '../../models/payment_type_model.dart';
 import '../../services/auth/payment_type/i_payment_type_service.dart';
@@ -15,7 +15,7 @@ abstract class PaymentTypeControllerBase with Store {
   final IPaymentTypeService _paymentTypeService;
 
   @readonly
-  var _status = PaymentTypeStateStatusEnum.initial;
+  var _paymentTypState = PaymentTypeStateEnum.initial;
 
   @readonly
   String? _errorMessage;
@@ -38,39 +38,39 @@ abstract class PaymentTypeControllerBase with Store {
   @action
   Future<void> loadPayments() async {
     try {
-      _status = PaymentTypeStateStatusEnum.loading;
+      _paymentTypState = PaymentTypeStateEnum.loading;
 
       _paymentTypes = await _paymentTypeService.findAll(_filterEnabled);
 
-      _status = PaymentTypeStateStatusEnum.loaded;
+      _paymentTypState = PaymentTypeStateEnum.loaded;
     } on RepositoryException catch (err, s) {
       log('Erro ao carregar as formas de pagamento.', error: err, stackTrace: s);
 
-      _status = PaymentTypeStateStatusEnum.error;
+      _paymentTypState = PaymentTypeStateEnum.error;
       _errorMessage = 'Erro ao carregar as formas de pagamento.';
     }
   }
 
   @action
   Future<void> addPayment() async {
-    _status = PaymentTypeStateStatusEnum.loading;
+    _paymentTypState = PaymentTypeStateEnum.loading;
 
     await Future.delayed(Duration.zero);
 
     _selectedPaymentType = null;
 
-    _status = PaymentTypeStateStatusEnum.addOrUpdatePayment;
+    _paymentTypState = PaymentTypeStateEnum.addOrUpdatePayment;
   }
 
   @action
   Future<void> editPayment(PaymentTypeModel paymentType) async {
-    _status = PaymentTypeStateStatusEnum.loading;
+    _paymentTypState = PaymentTypeStateEnum.loading;
 
     await Future.delayed(Duration.zero);
 
     _selectedPaymentType = paymentType;
 
-    _status = PaymentTypeStateStatusEnum.addOrUpdatePayment;
+    _paymentTypState = PaymentTypeStateEnum.addOrUpdatePayment;
   }
 
   @action
@@ -80,7 +80,7 @@ abstract class PaymentTypeControllerBase with Store {
     required String acronym,
     required bool enabled,
   }) async {
-    _status = PaymentTypeStateStatusEnum.loading;
+    _paymentTypState = PaymentTypeStateEnum.loading;
 
     final paymentType = PaymentTypeModel(
       id: id,
@@ -91,6 +91,6 @@ abstract class PaymentTypeControllerBase with Store {
 
     await _paymentTypeService.save(paymentType);
 
-    _status = PaymentTypeStateStatusEnum.saved;
+    _paymentTypState = PaymentTypeStateEnum.saved;
   }
 }

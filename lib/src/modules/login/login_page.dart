@@ -3,7 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:validatorless/validatorless.dart';
 
-import '../../core/enums/login_state_status_enum.dart';
+import '../../core/enums/login_state_enum.dart';
 import '../../core/extensions/app_colors_extension.dart';
 import '../../core/extensions/app_text_styles_extension.dart';
 import '../../core/extensions/size_extension.dart';
@@ -32,19 +32,19 @@ class _LoginPageState extends State<LoginPage> with LoaderMixin, MessageMixin {
   @override
   void initState() {
     statusReactionDisposer = reaction(
-      (_) => controller.loginStatus,
+      (_) => controller.loginState,
       (status) {
         switch (status) {
-          case LoginStateStatusEnum.initial:
+          case LoginStateEnum.initial:
             break;
-          case LoginStateStatusEnum.loading:
+          case LoginStateEnum.loading:
             showLoader();
             break;
-          case LoginStateStatusEnum.success:
+          case LoginStateEnum.success:
             hideLoader();
             Modular.to.navigate('/');
             break;
-          case LoginStateStatusEnum.error:
+          case LoginStateEnum.error:
             hideLoader();
             showError(controller.errorMessage ?? 'Erro ao realizar o login.');
             _emailFN.requestFocus();
@@ -94,6 +94,7 @@ class _LoginPageState extends State<LoginPage> with LoaderMixin, MessageMixin {
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('assets/images/lanche.png'),
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),

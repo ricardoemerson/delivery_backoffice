@@ -9,21 +9,21 @@ part of 'payment_type_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$PaymentTypeController on PaymentTypeControllerBase, Store {
-  late final _$_statusAtom =
-      Atom(name: 'PaymentTypeControllerBase._status', context: context);
+  late final _$_paymentTypStateAtom = Atom(
+      name: 'PaymentTypeControllerBase._paymentTypState', context: context);
 
-  PaymentTypeStateStatusEnum get status {
-    _$_statusAtom.reportRead();
-    return super._status;
+  PaymentTypeStateEnum get paymentTypState {
+    _$_paymentTypStateAtom.reportRead();
+    return super._paymentTypState;
   }
 
   @override
-  PaymentTypeStateStatusEnum get _status => status;
+  PaymentTypeStateEnum get _paymentTypState => paymentTypState;
 
   @override
-  set _status(PaymentTypeStateStatusEnum value) {
-    _$_statusAtom.reportWrite(value, super._status, () {
-      super._status = value;
+  set _paymentTypState(PaymentTypeStateEnum value) {
+    _$_paymentTypStateAtom.reportWrite(value, super._paymentTypState, () {
+      super._paymentTypState = value;
     });
   }
 

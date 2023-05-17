@@ -3,7 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
-import '../../core/enums/payment_type_state_status_enum.dart';
+import '../../core/enums/payment_type_state_enum.dart';
 import '../../core/helpers/loader_mixin.dart';
 import '../../core/helpers/message_mixin.dart';
 import 'payment_type_controller.dart';
@@ -32,25 +32,25 @@ class _PaymentTypePageState extends State<PaymentTypePage> with LoaderMixin, Mes
         controller.loadPayments();
       });
 
-      final statusDisposer = reaction((_) => controller.status, (status) {
+      final statusDisposer = reaction((_) => controller.paymentTypState, (status) {
         switch (status) {
-          case PaymentTypeStateStatusEnum.initial:
+          case PaymentTypeStateEnum.initial:
             break;
-          case PaymentTypeStateStatusEnum.loading:
+          case PaymentTypeStateEnum.loading:
             showLoader();
             break;
-          case PaymentTypeStateStatusEnum.loaded:
+          case PaymentTypeStateEnum.loaded:
             hideLoader();
             break;
-          case PaymentTypeStateStatusEnum.error:
+          case PaymentTypeStateEnum.error:
             hideLoader();
             showError(controller.errorMessage ?? 'Erro ao buscar formas de pagamento.');
             break;
-          case PaymentTypeStateStatusEnum.addOrUpdatePayment:
+          case PaymentTypeStateEnum.addOrUpdatePayment:
             hideLoader();
             showAddOrUpdatePayment();
             break;
-          case PaymentTypeStateStatusEnum.saved:
+          case PaymentTypeStateEnum.saved:
             hideLoader();
             Navigator.of(context, rootNavigator: true).pop();
             controller.loadPayments();
@@ -109,8 +109,8 @@ class _PaymentTypePageState extends State<PaymentTypePage> with LoaderMixin, Mes
                   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                     mainAxisExtent: 120,
                     mainAxisSpacing: 20,
-                    crossAxisSpacing: 10,
                     maxCrossAxisExtent: 680,
+                    crossAxisSpacing: 10,
                   ),
                   itemBuilder: (context, index) {
                     final paymentType = controller.paymentTypes[index];

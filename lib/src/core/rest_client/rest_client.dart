@@ -30,7 +30,9 @@ class RestClient extends DioForBrowser {
   }
 
   RestClient authRequest() {
-    interceptors.add(_authInterceptor);
+    if (!interceptors.contains(_authInterceptor)) {
+      interceptors.add(_authInterceptor);
+    }
 
     return this;
   }
