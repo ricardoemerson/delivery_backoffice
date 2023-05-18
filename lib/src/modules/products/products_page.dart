@@ -92,7 +92,7 @@ class _ProductsPageState extends State<ProductsPage> with LoaderMixin, MessageMi
                       itemBuilder: (context, index) {
                         final product = controller.products[index];
 
-                        return ProductItem(product: product);
+                        return ProductItem(controller: controller, product: product);
                       },
                     );
                   },

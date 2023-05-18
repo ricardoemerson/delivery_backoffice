@@ -19,7 +19,7 @@ abstract class ProductDetailControllerBase with Store {
   var _productDetailState = ProductDetailStateEnum.initial;
 
   @readonly
-  ProductModel? _products;
+  ProductModel? _product;
 
   @readonly
   String? _errorMessage;
@@ -41,7 +41,14 @@ abstract class ProductDetailControllerBase with Store {
   }
 
   @action
+  void clearData() {
+    _product = null;
+    _imagePath = null;
+  }
+
+  @action
   Future<void> salvar({
+    int? id,
     required String name,
     required double price,
     required String description,
@@ -50,11 +57,12 @@ abstract class ProductDetailControllerBase with Store {
       _productDetailState = ProductDetailStateEnum.loading;
 
       final product = ProductModel(
+        id: id,
         name: name,
         description: description,
         price: price,
         image: _imagePath!,
-        enabled: true,
+        enabled: _product?.enabled ?? true,
       );
 
       await _productService.save(product);
@@ -65,6 +73,27 @@ abstract class ProductDetailControllerBase with Store {
 
       _productDetailState = ProductDetailStateEnum.error;
       _errorMessage = 'Erro ao salvar produto.';
+    }
+  }
+
+  @action
+  Future<void> loadProductById(int? id) async {
+    try {
+      _productDetailState = ProductDetailStateEnum.loading;
+
+      clearData();
+
+      if (id != null) {
+        _product = await _productService.findById(id);
+        _imagePath = _product!.image;
+      }
+
+      _productDetailState = ProductDetailStateEnum.loaded;
+    } on RepositoryException catch (err, s) {
+      log('Erro ao buscar produto $id.', error: err, stackTrace: s);
+
+      _productDetailState = ProductDetailStateEnum.error;
+      _errorMessage = 'Erro ao buscar produto $id.';
     }
   }
 }

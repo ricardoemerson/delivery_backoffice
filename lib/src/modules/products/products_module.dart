@@ -15,6 +15,13 @@ class ProductsModule extends Module {
   @override
   List<ModularRoute> get routes => [
         ChildRoute('/', child: (context, args) => const ProductsPage()),
-        ChildRoute('/detail', child: (context, args) => const ProductDetailPage()),
+        ChildRoute(
+          '/detail',
+          child: (context, args) => const ProductDetailPage(),
+        ),
+        ChildRoute(
+          '/detail/:id',
+          child: (context, args) => ProductDetailPage(id: int.tryParse(args.params['id'])),
+        ),
       ];
 }

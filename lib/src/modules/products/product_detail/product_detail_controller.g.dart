@@ -28,21 +28,21 @@ mixin _$ProductDetailController on ProductDetailControllerBase, Store {
     });
   }
 
-  late final _$_productsAtom =
-      Atom(name: 'ProductDetailControllerBase._products', context: context);
+  late final _$_productAtom =
+      Atom(name: 'ProductDetailControllerBase._product', context: context);
 
-  ProductModel? get products {
-    _$_productsAtom.reportRead();
-    return super._products;
+  ProductModel? get product {
+    _$_productAtom.reportRead();
+    return super._product;
   }
 
   @override
-  ProductModel? get _products => products;
+  ProductModel? get _product => product;
 
   @override
-  set _products(ProductModel? value) {
-    _$_productsAtom.reportWrite(value, super._products, () {
-      super._products = value;
+  set _product(ProductModel? value) {
+    _$_productAtom.reportWrite(value, super._product, () {
+      super._product = value;
     });
   }
 
@@ -97,11 +97,35 @@ mixin _$ProductDetailController on ProductDetailControllerBase, Store {
 
   @override
   Future<void> salvar(
-      {required String name,
+      {int? id,
+      required String name,
       required double price,
       required String description}) {
-    return _$salvarAsyncAction.run(
-        () => super.salvar(name: name, price: price, description: description));
+    return _$salvarAsyncAction.run(() => super
+        .salvar(id: id, name: name, price: price, description: description));
+  }
+
+  late final _$loadProductByIdAsyncAction = AsyncAction(
+      'ProductDetailControllerBase.loadProductById',
+      context: context);
+
+  @override
+  Future<void> loadProductById(int? id) {
+    return _$loadProductByIdAsyncAction.run(() => super.loadProductById(id));
+  }
+
+  late final _$ProductDetailControllerBaseActionController =
+      ActionController(name: 'ProductDetailControllerBase', context: context);
+
+  @override
+  void clearData() {
+    final _$actionInfo = _$ProductDetailControllerBaseActionController
+        .startAction(name: 'ProductDetailControllerBase.clearData');
+    try {
+      return super.clearData();
+    } finally {
+      _$ProductDetailControllerBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override

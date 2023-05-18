@@ -9,10 +9,12 @@ import 'package:validatorless/validatorless.dart';
 import '../../../core/enums/product_detail_state_enum.dart';
 import '../../../core/env/env.dart';
 import '../../../core/extensions/app_text_styles_extension.dart';
+import '../../../core/extensions/formatter_extension.dart';
 import '../../../core/extensions/size_extension.dart';
 import '../../../core/helpers/upload_html_helper.dart';
 import '../../../core/mixins/loader_mixin.dart';
 import '../../../core/mixins/message_mixin.dart';
+import '../../../models/product_model.dart';
 import 'product_detail_controller.dart';
 
 class ProductDetailPage extends StatefulWidget {
@@ -34,6 +36,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> with LoaderMixin,
 
   late final ReactionDisposer statusDisposer;
 
+  ProductModel? product;
+
   @override
   void initState() {
     super.initState();
@@ -48,13 +52,17 @@ class _ProductDetailPageState extends State<ProductDetailPage> with LoaderMixin,
             break;
           case ProductDetailStateEnum.loaded:
             hideLoader();
+
+            final model = controller.product!;
+
+            _nameEC.text = model.name;
+            _priceEC.text = model.price.toCurrencyPtBr;
+            _descriptionEC.text = model.description;
+
             break;
           case ProductDetailStateEnum.error:
             hideLoader();
             showError(controller.errorMessage ?? 'Erro ao buscar detalhe de produtos.');
-            break;
-          case ProductDetailStateEnum.errorLoadProduct:
-            hideLoader();
             break;
           case ProductDetailStateEnum.deleted:
             hideLoader();
@@ -68,6 +76,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> with LoaderMixin,
             break;
         }
       });
+
+      if (widget.id != null) {
+        controller.loadProductById(widget.id);
+      } else {
+        controller.clearData();
+      }
     });
   }
 
@@ -226,6 +240,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with LoaderMixin,
                             }
 
                             controller.salvar(
+                              id: widget.id,
                               name: _nameEC.text,
                               price: UtilBrasilFields.converterMoedaParaDouble(_priceEC.text),
                               description: _descriptionEC.text,

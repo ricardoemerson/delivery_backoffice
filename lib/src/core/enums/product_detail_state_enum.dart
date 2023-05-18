@@ -3,7 +3,6 @@ enum ProductDetailStateEnum {
   loading,
   loaded,
   error,
-  errorLoadProduct,
   deleted,
   uploaded,
   saved;
