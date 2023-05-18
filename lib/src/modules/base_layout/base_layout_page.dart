@@ -53,7 +53,7 @@ class BaseLayoutPage extends StatelessWidget {
                       child: ColoredBox(
                         color: Colors.grey[50]!,
                         child: Padding(
-                          padding: const EdgeInsets.all(20.0),
+                          padding: const EdgeInsets.all(40.0),
                           child: body,
                         ),
                       ),

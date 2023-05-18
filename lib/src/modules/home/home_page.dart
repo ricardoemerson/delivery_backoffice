@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../core/env/env.dart';
-import '../../core/helpers/loader_mixin.dart';
-import '../../core/helpers/message_mixin.dart';
+import '../../core/mixins/loader_mixin.dart';
+import '../../core/mixins/message_mixin.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

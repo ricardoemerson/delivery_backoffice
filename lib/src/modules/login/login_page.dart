@@ -7,8 +7,8 @@ import '../../core/enums/login_state_enum.dart';
 import '../../core/extensions/app_colors_extension.dart';
 import '../../core/extensions/app_text_styles_extension.dart';
 import '../../core/extensions/size_extension.dart';
-import '../../core/helpers/loader_mixin.dart';
-import '../../core/helpers/message_mixin.dart';
+import '../../core/mixins/loader_mixin.dart';
+import '../../core/mixins/message_mixin.dart';
 import 'login_controller.dart';
 
 class LoginPage extends StatefulWidget {

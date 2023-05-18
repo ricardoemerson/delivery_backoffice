@@ -4,11 +4,11 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../core/enums/product_state_enum.dart';
-import '../../core/helpers/debounce.dart';
-import '../../core/helpers/loader_mixin.dart';
-import '../../core/helpers/message_mixin.dart';
+import '../../core/helpers/debounce_helper.dart';
+import '../../core/mixins/loader_mixin.dart';
+import '../../core/mixins/message_mixin.dart';
 import '../../core/widgets/base_header.dart';
-import 'widgets/product_controller.dart';
+import 'product_controller.dart';
 import 'widgets/product_item.dart';
 
 class ProductsPage extends StatefulWidget {
@@ -21,7 +21,7 @@ class ProductsPage extends StatefulWidget {
 class _ProductsPageState extends State<ProductsPage> with LoaderMixin, MessageMixin {
   final controller = Modular.get<ProductController>();
   late final ReactionDisposer statusDisposer;
-  final debounce = Debounce(milliseconds: 500);
+  final debounce = DebounceHelper(milliseconds: 500);
 
   @override
   void initState() {
@@ -64,7 +64,11 @@ class _ProductsPageState extends State<ProductsPage> with LoaderMixin, MessageMi
           BaseHeader(
             title: 'ADMINISTRAR PRODUTOS',
             buttonLabel: 'Adicionar Produto',
-            buttonPressed: () {},
+            buttonPressed: () async {
+              await Modular.to.pushNamed('/products/detail');
+
+              controller.loadProducts();
+            },
             searchChanged: (value) {
               debounce.call(() {
                 controller.filterByName(value);

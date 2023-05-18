@@ -4,8 +4,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../core/enums/payment_type_state_enum.dart';
-import '../../core/helpers/loader_mixin.dart';
-import '../../core/helpers/message_mixin.dart';
+import '../../core/mixins/loader_mixin.dart';
+import '../../core/mixins/message_mixin.dart';
 import 'payment_type_controller.dart';
 import 'widgets/payment_type_form_modal.dart';
 import 'widgets/payment_type_header.dart';

@@ -19,8 +19,8 @@ class ProductService implements IProductService {
   Future<void> save(ProductModel productModel) => _productRepository.save(productModel);
 
   @override
-  Future<String> uploadImage(file, String fileName) =>
-      _productRepository.uploadImage(file, fileName);
+  Future<String> uploadImage(file, String filename) =>
+      _productRepository.uploadImage(file, filename);
 
   @override
   Future<void> delete(int id) => _productRepository.delete(id);

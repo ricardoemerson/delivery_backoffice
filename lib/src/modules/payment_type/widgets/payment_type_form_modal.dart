@@ -73,9 +73,9 @@ class _PaymentTypeFormModalState extends State<PaymentTypeFormModal> {
                     ),
                     Align(
                       alignment: Alignment.centerRight,
-                      child: InkWell(
-                        onTap: _closeModal,
-                        child: const Icon(Icons.close),
+                      child: IconButton(
+                        onPressed: _closeModal,
+                        icon: const Icon(Icons.close),
                       ),
                     )
                   ],
@@ -115,7 +115,7 @@ class _PaymentTypeFormModalState extends State<PaymentTypeFormModal> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     SizedBox(
-                      height: 42,
+                      height: 40,
                       child: OutlinedButton(
                         onPressed: _closeModal,
                         style: OutlinedButton.styleFrom(
@@ -129,7 +129,7 @@ class _PaymentTypeFormModalState extends State<PaymentTypeFormModal> {
                     ),
                     const SizedBox(width: 15),
                     SizedBox(
-                      height: 42,
+                      height: 40,
                       child: ElevatedButton.icon(
                         onPressed: () {
                           final formIsValid = _formKey.currentState?.validate() ?? false;
