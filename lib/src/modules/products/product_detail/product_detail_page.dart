@@ -62,15 +62,15 @@ class _ProductDetailPageState extends State<ProductDetailPage> with LoaderMixin,
             break;
           case ProductDetailStateEnum.error:
             hideLoader();
-            showError(controller.errorMessage ?? 'Erro ao buscar detalhe de produtos.');
-            break;
-          case ProductDetailStateEnum.deleted:
-            hideLoader();
+            showError(controller.errorMessage!);
+            Navigator.of(context).pop();
+
             break;
           case ProductDetailStateEnum.uploaded:
             hideLoader();
             break;
           case ProductDetailStateEnum.saved:
+          case ProductDetailStateEnum.deleted:
             hideLoader();
             Navigator.of(context).pop();
             break;
@@ -208,17 +208,53 @@ class _ProductDetailPageState extends State<ProductDetailPage> with LoaderMixin,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    SizedBox(
-                      width: widthButtonAction / 2 - 5,
-                      height: 40,
-                      child: OutlinedButton(
-                        onPressed: () {},
-                        style: OutlinedButton.styleFrom(
-                          side: const BorderSide(color: Colors.red),
-                        ),
-                        child: Text(
-                          'Excluir',
-                          style: context.textStyles.textExtraBold.copyWith(color: Colors.red),
+                    Visibility(
+                      visible: widget.id != null,
+                      child: SizedBox(
+                        width: widthButtonAction / 2 - 5,
+                        height: 40,
+                        child: OutlinedButton(
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: const Text('Confirmar'),
+                                  content: Text(
+                                    'Confirma a exclusão do produto ${controller.product?.name}?',
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () => Navigator.of(context).pop(),
+                                      child: Text(
+                                        'Cancelar',
+                                        style: context.textStyles.textBold.copyWith(
+                                          color: Colors.red,
+                                        ),
+                                      ),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                        controller.delete();
+                                      },
+                                      child: Text(
+                                        'Confirmar',
+                                        style: context.textStyles.textBold,
+                                      ),
+                                    )
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                          style: OutlinedButton.styleFrom(
+                            side: const BorderSide(color: Colors.red),
+                          ),
+                          child: Text(
+                            'Excluir',
+                            style: context.textStyles.textExtraBold.copyWith(color: Colors.red),
+                          ),
                         ),
                       ),
                     ),

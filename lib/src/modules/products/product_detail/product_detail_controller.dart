@@ -96,4 +96,23 @@ abstract class ProductDetailControllerBase with Store {
       _errorMessage = 'Erro ao buscar produto $id.';
     }
   }
+
+  @action
+  Future<void> delete() async {
+    try {
+      _productDetailState = ProductDetailStateEnum.loading;
+
+      if (_product != null && _product!.id != null) {
+        await _productService.delete(_product!.id!);
+        _imagePath = _product!.image;
+      }
+
+      _productDetailState = ProductDetailStateEnum.deleted;
+    } on RepositoryException catch (err, s) {
+      log('Erro ao excluir produto.', error: err, stackTrace: s);
+
+      _productDetailState = ProductDetailStateEnum.error;
+      _errorMessage = 'Erro ao excluir produto.';
+    }
+  }
 }

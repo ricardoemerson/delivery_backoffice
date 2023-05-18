@@ -114,6 +114,14 @@ mixin _$ProductDetailController on ProductDetailControllerBase, Store {
     return _$loadProductByIdAsyncAction.run(() => super.loadProductById(id));
   }
 
+  late final _$deleteAsyncAction =
+      AsyncAction('ProductDetailControllerBase.delete', context: context);
+
+  @override
+  Future<void> delete() {
+    return _$deleteAsyncAction.run(() => super.delete());
+  }
+
   late final _$ProductDetailControllerBaseActionController =
       ActionController(name: 'ProductDetailControllerBase', context: context);
 
