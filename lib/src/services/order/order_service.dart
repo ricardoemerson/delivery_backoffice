@@ -11,11 +11,11 @@ class OrderService implements IOrderService {
   }) : _orderRepository = orderRepository;
 
   @override
-  Future<List<OrderModel>> findAllOrders(DateTime date, [OrderStatusEnum? status]) =>
-      _orderRepository.findAllOrders(date, status);
+  Future<List<OrderModel>> findAll(DateTime date, [OrderStatusEnum? status]) =>
+      _orderRepository.findAll(date, status);
 
   @override
-  Future<OrderModel> getById(int id) => _orderRepository.getById(id);
+  Future<OrderModel> findById(int id) => _orderRepository.findById(id);
 
   @override
   Future<void> changeStatus(int id, OrderStatusEnum status) =>

@@ -44,10 +44,10 @@ abstract class PaymentTypeControllerBase with Store {
 
       _paymentTypState = PaymentTypeStateEnum.loaded;
     } on RepositoryException catch (err, s) {
-      log('Erro ao carregar as formas de pagamento.', error: err, stackTrace: s);
+      log('Erro ao buscar formas de pagamento.', error: err, stackTrace: s);
 
       _paymentTypState = PaymentTypeStateEnum.error;
-      _errorMessage = 'Erro ao carregar as formas de pagamento.';
+      _errorMessage = 'Erro ao buscar formas de pagamento.';
     }
   }
 

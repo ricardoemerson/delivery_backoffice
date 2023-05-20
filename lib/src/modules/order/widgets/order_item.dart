@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/extensions/app_text_styles_extension.dart';
+import '../../../models/order_model.dart';
 
 class OrderItem extends StatelessWidget {
-  const OrderItem({super.key});
+  final OrderModel order;
+
+  const OrderItem({
+    super.key,
+    required this.order,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +31,14 @@ class OrderItem extends StatelessWidget {
                     children: [
                       Text('Pedido', style: context.textStyles.textBold),
                       const SizedBox(width: 10),
-                      Text('1', style: context.textStyles.textExtraBold),
+                      Text(order.id.toString(), style: context.textStyles.textExtraBold),
                       const Spacer(),
                       Text(
-                        'Cancelado',
+                        order.status.name,
                         textAlign: TextAlign.end,
                         style: context.textStyles.textExtraBold.copyWith(
                           fontSize: 20,
-                          color: Colors.red,
+                          color: order.status.color,
                         ),
                       ),
                     ],

@@ -16,7 +16,7 @@ class OrderRepository implements IOrderRepository {
   }) : _restClient = restClient;
 
   @override
-  Future<List<OrderModel>> findAllOrders(DateTime date, [OrderStatusEnum? status]) async {
+  Future<List<OrderModel>> findAll(DateTime date, [OrderStatusEnum? status]) async {
     try {
       final orders = await _restClient.authRequest().get(
         '/orders',
@@ -34,7 +34,7 @@ class OrderRepository implements IOrderRepository {
   }
 
   @override
-  Future<OrderModel> getById(int id) async {
+  Future<OrderModel> findById(int id) async {
     try {
       final order = await _restClient.authRequest().get('/orders');
 
