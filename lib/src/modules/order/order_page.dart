@@ -7,6 +7,7 @@ import '../../core/enums/order_state_enum.dart';
 import '../../core/mixins/loader_mixin.dart';
 import '../../core/mixins/message_mixin.dart';
 import 'order_controller.dart';
+import 'widgets/order_detail_modal.dart';
 import 'widgets/order_header.dart';
 import 'widgets/order_item.dart';
 
@@ -36,6 +37,10 @@ class _OrderPageState extends State<OrderPage> with LoaderMixin, MessageMixin {
           case OrderStateEnum.loaded:
             hideLoader();
             break;
+          case OrderStateEnum.showModalDetailModal:
+            hideLoader();
+            showOrderDetail();
+            break;
           case OrderStateEnum.error:
             hideLoader();
             showError(controller.errorMessage ?? 'Erro ao buscar pedidos do dia.');
@@ -52,6 +57,15 @@ class _OrderPageState extends State<OrderPage> with LoaderMixin, MessageMixin {
     statusDisposer();
 
     super.dispose();
+  }
+
+  void showOrderDetail() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const OrderDetailModal();
+      },
+    );
   }
 
   @override

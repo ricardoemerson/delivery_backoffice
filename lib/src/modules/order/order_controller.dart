@@ -52,4 +52,13 @@ abstract class OrderControllerBase with Store {
       _errorMessage = 'Erro ao buscar pedidos do dia.';
     }
   }
+
+  @action
+  Future<void> showDetailModal(OrderModel orderModel) async {
+    _orderState = OrderStateEnum.loading;
+
+    await Future.delayed(Duration.zero);
+
+    _orderState = OrderStateEnum.showModalDetailModal;
+  }
 }
