@@ -1,8 +1,11 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../core/enums/menu_enum.dart';
 import '../../../core/extensions/size_extension.dart';
+import '../../../core/mixins/history_back_listener_mixin.dart';
 import 'side_bar_menu_item.dart';
 
 class SideBar extends StatefulWidget {
@@ -12,9 +15,23 @@ class SideBar extends StatefulWidget {
   State<SideBar> createState() => _SideBarState();
 }
 
-class _SideBarState extends State<SideBar> {
+class _SideBarState extends State<SideBar> with HistoryBackListenerMixin {
   MenuEnum? selectedMenu;
   var collapsed = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    selectedMenu = MenuEnum.findByPath(Modular.to.path);
+  }
+
+  @override
+  void onHistoryBack(Event event) {
+    setState(() {
+      selectedMenu = MenuEnum.findByPath(Modular.to.path);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

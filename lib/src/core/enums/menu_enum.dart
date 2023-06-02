@@ -24,4 +24,12 @@ enum MenuEnum {
   final String label;
 
   const MenuEnum(this.route, this.icon, this.selectedIcon, this.label);
+
+  static MenuEnum? findByPath(String path) {
+    final menu = MenuEnum.values.where((element) => path.contains(element.route));
+
+    if (menu.isEmpty) return null;
+
+    return menu.first;
+  }
 }
