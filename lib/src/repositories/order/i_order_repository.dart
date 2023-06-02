@@ -1,4 +1,4 @@
-import '../../core/enums/order_status_enum.dart';
+import '../../enums/order_status_enum.dart';
 import '../../models/order_model.dart';
 
 abstract class IOrderRepository {

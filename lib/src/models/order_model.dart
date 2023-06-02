@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import '../core/enums/order_status_enum.dart';
+import '../enums/order_status_enum.dart';
 import 'order_product_model.dart';
 
 class OrderModel {

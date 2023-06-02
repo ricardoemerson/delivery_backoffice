@@ -2,9 +2,9 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 
-import '../../core/enums/order_status_enum.dart';
 import '../../core/exceptions/repository_exception.dart';
 import '../../core/rest_client/rest_client.dart';
+import '../../enums/order_status_enum.dart';
 import '../../models/order_model.dart';
 import 'i_order_repository.dart';
 

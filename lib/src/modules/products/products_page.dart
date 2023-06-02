@@ -3,11 +3,11 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
-import '../../core/enums/product_state_enum.dart';
 import '../../core/helpers/debounce_helper.dart';
 import '../../core/mixins/loader_mixin.dart';
 import '../../core/mixins/message_mixin.dart';
 import '../../core/widgets/base_header.dart';
+import '../../enums/product_state_enum.dart';
 import 'product_controller.dart';
 import 'widgets/product_item.dart';
 

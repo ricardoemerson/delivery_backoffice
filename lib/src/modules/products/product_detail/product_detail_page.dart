@@ -6,7 +6,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:validatorless/validatorless.dart';
 
-import '../../../core/enums/product_detail_state_enum.dart';
 import '../../../core/env/env.dart';
 import '../../../core/extensions/app_text_styles_extension.dart';
 import '../../../core/extensions/formatter_extension.dart';
@@ -14,6 +13,7 @@ import '../../../core/extensions/size_extension.dart';
 import '../../../core/helpers/upload_html_helper.dart';
 import '../../../core/mixins/loader_mixin.dart';
 import '../../../core/mixins/message_mixin.dart';
+import '../../../enums/product_detail_state_enum.dart';
 import '../../../models/product_model.dart';
 import 'product_detail_controller.dart';
 

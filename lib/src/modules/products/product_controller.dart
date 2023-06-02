@@ -2,8 +2,8 @@ import 'dart:developer';
 
 import 'package:mobx/mobx.dart';
 
-import '../../core/enums/product_state_enum.dart';
 import '../../core/exceptions/repository_exception.dart';
+import '../../enums/product_state_enum.dart';
 import '../../models/product_model.dart';
 import '../../services/product/i_product_service.dart';
 

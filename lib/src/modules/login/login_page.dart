@@ -3,12 +3,12 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:validatorless/validatorless.dart';
 
-import '../../core/enums/login_state_enum.dart';
 import '../../core/extensions/app_colors_extension.dart';
 import '../../core/extensions/app_text_styles_extension.dart';
 import '../../core/extensions/size_extension.dart';
 import '../../core/mixins/loader_mixin.dart';
 import '../../core/mixins/message_mixin.dart';
+import '../../enums/login_state_enum.dart';
 import 'login_controller.dart';
 
 class LoginPage extends StatefulWidget {

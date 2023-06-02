@@ -2,8 +2,8 @@ import 'dart:developer';
 
 import 'package:mobx/mobx.dart';
 
-import '../../core/enums/payment_type_state_enum.dart';
 import '../../core/exceptions/repository_exception.dart';
+import '../../enums/payment_type_state_enum.dart';
 import '../../models/payment_type_model.dart';
 import '../../services/auth/payment_type/i_payment_type_service.dart';
 
