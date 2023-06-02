@@ -3,5 +3,6 @@ enum OrderStateEnum {
   loading,
   loaded,
   showModalDetailModal,
+  statusChanged,
   error;
 }

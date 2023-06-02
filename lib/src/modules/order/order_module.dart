@@ -12,7 +12,12 @@ class OrderModule extends Module {
   List<Bind> get binds => [
         Bind.lazySingleton<IOrderRepository>((i) => OrderRepository(restClient: i())),
         Bind.lazySingleton<IOrderService>(
-          (i) => OrderService(orderRepository: i()),
+          (i) => OrderService(
+            orderRepository: i(),
+            paymentTypeRepository: i(),
+            productRepository: i(),
+            userRepository: i(),
+          ),
         ),
         Bind.lazySingleton((i) => OrderController(orderService: i())),
       ];

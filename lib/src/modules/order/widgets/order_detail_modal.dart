@@ -3,12 +3,21 @@ import 'package:flutter/material.dart';
 import '../../../core/extensions/app_text_styles_extension.dart';
 import '../../../core/extensions/formatter_extension.dart';
 import '../../../core/extensions/size_extension.dart';
+import '../../../dtos/order_dto.dart';
+import '../order_controller.dart';
 import 'order_bottom_bar.dart';
 import 'order_info_tile.dart';
 import 'order_product_item.dart';
 
 class OrderDetailModal extends StatefulWidget {
-  const OrderDetailModal({super.key});
+  final OrderController controller;
+  final OrderDto order;
+
+  const OrderDetailModal({
+    super.key,
+    required this.controller,
+    required this.order,
+  });
 
   @override
   State<OrderDetailModal> createState() => _OrderDetailModalState();
@@ -63,14 +72,14 @@ class _OrderDetailModalState extends State<OrderDetailModal> {
                       ),
                       const SizedBox(width: 10),
                       Text(
-                        'Ricardo Emerson',
+                        widget.order.user.name,
                         style: context.textStyles.textRegular,
                       ),
                     ],
                   ),
                   const Divider(),
-                  ...List.generate(3, (index) => index)
-                      .map((e) => const OrderProductItem())
+                  ...widget.order.orderProducts
+                      .map((op) => OrderProductItem(orderProduct: op))
                       .toList(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -80,17 +89,19 @@ class _OrderDetailModalState extends State<OrderDetailModal> {
                         style: context.textStyles.textBold.copyWith(fontSize: 18),
                       ),
                       Text(
-                        200.0.toCurrencyPtBr,
+                        widget.order.orderProducts
+                            .fold<double>(0.0, (previousValue, p) => previousValue + p.totalPrice)
+                            .toCurrencyPtBr,
                         style: context.textStyles.textBold.copyWith(fontSize: 18),
                       ),
                     ],
                   ),
                   const Divider(),
-                  const OrderInfoTile(label: 'Endereço de entrega:', info: 'Av. Paulista, 200'),
+                  OrderInfoTile(label: 'Endereço de entrega:', info: widget.order.address),
                   const Divider(),
-                  const OrderInfoTile(label: 'Forma de pagamento:', info: 'Cartão de Crédito'),
+                  OrderInfoTile(label: 'Forma de pagamento:', info: widget.order.paymentType.name),
                   const SizedBox(height: 10),
-                  const OrderBottomBar(),
+                  OrderBottomBar(controller: widget.controller, order: widget.order),
                 ],
               ),
             ),

@@ -7,6 +7,7 @@ class OrderBottomBarButton extends StatelessWidget {
   final String image;
   final Color color;
   final BorderRadius borderRadius;
+  final VoidCallback? onPressed;
 
   const OrderBottomBarButton({
     super.key,
@@ -14,6 +15,7 @@ class OrderBottomBarButton extends StatelessWidget {
     required this.image,
     required this.color,
     required this.borderRadius,
+    required this.onPressed,
   });
 
   @override
@@ -23,13 +25,13 @@ class OrderBottomBarButton extends StatelessWidget {
       child: SizedBox(
         height: 50,
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: onPressed,
           style: ElevatedButton.styleFrom(
             backgroundColor: color,
             shape: RoundedRectangleBorder(
               borderRadius: borderRadius,
             ),
-            side: BorderSide(color: color),
+            side: BorderSide(color: onPressed != null ? color : Colors.transparent),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,

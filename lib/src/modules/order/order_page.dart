@@ -3,9 +3,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
-import '../../core/enums/order_state_enum.dart';
 import '../../core/mixins/loader_mixin.dart';
 import '../../core/mixins/message_mixin.dart';
+import '../../enums/order_state_enum.dart';
 import 'order_controller.dart';
 import 'widgets/order_detail_modal.dart';
 import 'widgets/order_header.dart';
@@ -41,6 +41,11 @@ class _OrderPageState extends State<OrderPage> with LoaderMixin, MessageMixin {
             hideLoader();
             showOrderDetail();
             break;
+          case OrderStateEnum.statusChanged:
+            hideLoader();
+            Navigator.of(context, rootNavigator: true).pop();
+            controller.loadOrders();
+            break;
           case OrderStateEnum.error:
             hideLoader();
             showError(controller.errorMessage ?? 'Erro ao buscar pedidos do dia.');
@@ -63,7 +68,10 @@ class _OrderPageState extends State<OrderPage> with LoaderMixin, MessageMixin {
     showDialog(
       context: context,
       builder: (context) {
-        return const OrderDetailModal();
+        return OrderDetailModal(
+          controller: controller,
+          order: controller.selectedOrder!,
+        );
       },
     );
   }
@@ -75,7 +83,9 @@ class _OrderPageState extends State<OrderPage> with LoaderMixin, MessageMixin {
         builder: (context, constraints) {
           return Column(
             children: [
-              const OrderHeader(),
+              OrderHeader(
+                controller: controller,
+              ),
               Expanded(
                 child: Observer(
                   builder: (_) {

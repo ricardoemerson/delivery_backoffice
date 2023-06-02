@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../../core/extensions/app_text_styles_extension.dart';
 import '../../../core/extensions/formatter_extension.dart';
+import '../../../dtos/order_product_dto.dart';
 
 class OrderProductItem extends StatelessWidget {
-  const OrderProductItem({super.key});
+  final OrderProductDto orderProduct;
+
+  const OrderProductItem({super.key, required this.orderProduct});
 
   @override
   Widget build(BuildContext context) {
@@ -22,17 +25,17 @@ class OrderProductItem extends StatelessWidget {
               Expanded(
                 flex: 2,
                 child: Text(
-                  'X-Tudão',
+                  orderProduct.product.name,
                   style: context.textStyles.textRegular,
                 ),
               ),
               Text(
-                '1',
+                orderProduct.amount.toString(),
                 style: context.textStyles.textRegular,
               ),
               Expanded(
                 child: Text(
-                  100.0.toCurrencyPtBr,
+                  orderProduct.totalPrice.toCurrencyPtBr,
                   textAlign: TextAlign.right,
                   style: context.textStyles.textRegular,
                 ),

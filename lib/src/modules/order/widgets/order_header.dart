@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/enums/order_status_enum.dart';
 import '../../../core/widgets/base_header.dart';
+import '../../../enums/order_status_enum.dart';
+import '../order_controller.dart';
 
 class OrderHeader extends StatefulWidget {
-  const OrderHeader({super.key});
+  final OrderController controller;
+
+  const OrderHeader({
+    super.key,
+    required this.controller,
+  });
 
   @override
   State<OrderHeader> createState() => _OrderHeaderState();
@@ -21,6 +27,7 @@ class _OrderHeaderState extends State<OrderHeader> {
       filterWidget: DropdownButton<OrderStatusEnum>(
         onChanged: (value) {
           setState(() {
+            widget.controller.changeStatusFilter(value);
             selectedOrderStatus = value;
           });
         },

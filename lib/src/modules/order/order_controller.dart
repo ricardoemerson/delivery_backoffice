@@ -2,9 +2,10 @@ import 'dart:developer';
 
 import 'package:mobx/mobx.dart';
 
-import '../../core/enums/order_state_enum.dart';
-import '../../core/enums/order_status_enum.dart';
 import '../../core/exceptions/repository_exception.dart';
+import '../../dtos/order_dto.dart';
+import '../../enums/order_state_enum.dart';
+import '../../enums/order_status_enum.dart';
 import '../../models/order_model.dart';
 import '../../services/order/i_order_service.dart';
 
@@ -26,6 +27,9 @@ abstract class OrderControllerBase with Store {
 
   @readonly
   var _orders = <OrderModel>[];
+
+  @readonly
+  OrderDto? _selectedOrder;
 
   late final DateTime _today;
 
@@ -57,8 +61,23 @@ abstract class OrderControllerBase with Store {
   Future<void> showDetailModal(OrderModel orderModel) async {
     _orderState = OrderStateEnum.loading;
 
-    await Future.delayed(Duration.zero);
+    _selectedOrder = await _orderService.getOrderDetail(orderModel);
 
     _orderState = OrderStateEnum.showModalDetailModal;
+  }
+
+  @action
+  Future<void> changeStatus(OrderStatusEnum status) async {
+    _orderState = OrderStateEnum.loading;
+
+    await _orderService.changeStatus(_selectedOrder!.id, status);
+
+    _orderState = OrderStateEnum.statusChanged;
+  }
+
+  @action
+  void changeStatusFilter(OrderStatusEnum? status) {
+    _orderStatusFilter = status;
+    loadOrders();
   }
 }

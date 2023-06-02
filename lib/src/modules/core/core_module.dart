@@ -7,10 +7,14 @@ import '../../repositories/payment_type/i_payment_type_repository.dart';
 import '../../repositories/payment_type/payment_type_repository.dart';
 import '../../repositories/product/i_product_repository.dart';
 import '../../repositories/product/product_repository.dart';
+import '../../repositories/user/i_user_repository.dart';
+import '../../repositories/user/user_repository.dart';
 import '../../services/auth/payment_type/i_payment_type_service.dart';
 import '../../services/auth/payment_type/payment_type_service.dart';
 import '../../services/product/i_product_service.dart';
 import '../../services/product/product_service.dart';
+import '../../services/user/i_user_service.dart';
+import '../../services/user/user_service.dart';
 
 class CoreModule extends Module {
   @override
@@ -37,6 +41,14 @@ class CoreModule extends Module {
         ),
         Bind.lazySingleton<IProductService>(
           (i) => ProductService(productRepository: i()),
+          export: true,
+        ),
+        Bind.lazySingleton<IUserRepository>(
+          (i) => UserRepository(restClient: i()),
+          export: true,
+        ),
+        Bind.lazySingleton<IUserService>(
+          (i) => UserService(userRepository: i()),
           export: true,
         ),
       ];
