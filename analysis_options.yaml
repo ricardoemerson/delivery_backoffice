@@ -9,6 +9,7 @@ analyzer:
     - "**/*.freezed.dart"
     - "**/*.mocks.dart"
     - "**/injector.config.dart"
+
 linter:
   rules:
     always_declare_return_types: true
