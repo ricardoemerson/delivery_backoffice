@@ -46,7 +46,7 @@ class OrderBottomBar extends StatelessWidget {
         ),
         OrderBottomBarButton(
           onPressed:
-              order.status == OrderStatusEnum.pending && order.status == OrderStatusEnum.confirmed
+              order.status == OrderStatusEnum.pending || order.status == OrderStatusEnum.confirmed
                   ? () {
                       controller.changeStatus(OrderStatusEnum.canceled);
                     }
