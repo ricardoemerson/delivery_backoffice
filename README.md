@@ -61,7 +61,7 @@ json_rest_server run
 
 Siga as instruções abaixo para configurar e executar o projeto em seu ambiente local:
 
-Certifique-se de ter o Flutter instalado em sua máquina. Para obter as instruções de instalação, visite a documentação oficial do Flutter.
+Certifique-se de ter o Flutter instalado em sua máquina. Para obter as instruções de instalação, visite a documentação oficial do Flutter. A versão do Flutter utilizada neste projeto é a 3.10.2.
 
 Clone este repositório para o seu computador utilizando o seguinte comando:
 
@@ -88,6 +88,34 @@ flutter run -d chrome
 ```
 
 Isso abrirá o aplicativo Backoffice Delivery em seu navegador.
+
+## FVM
+
+Se você estiver com o FVM instalado em sua máquina basta proceder conforme abaixo:
+
+Navegue até o diretório clonado:
+
+```sh
+cd delivery_backoffice
+```
+
+Instale a versão do Flutter utilizada no projeto:
+
+```sh
+fvm install
+```
+
+Execute o seguinte comando para obter as dependências do projeto:
+
+```sh
+fvm flutter pub get
+```
+
+Agora você está pronto para executar o aplicativo em seu ambiente local. Utilize o comando:
+
+```sh
+fvm flutter run -d chrome
+```
 
 ## Contribuição
 Contribuições são bem-vindas! Se você tiver sugestões, correções de bugs ou melhorias para o projeto, sinta-se à vontade para abrir uma issue ou enviar um pull request.
