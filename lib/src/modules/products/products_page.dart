@@ -79,22 +79,18 @@ class _ProductsPageState extends State<ProductsPage> with LoaderMixin, MessageMi
           Expanded(
             child: Observer(
               builder: (_) {
-                return Observer(
-                  builder: (_) {
-                    return GridView.builder(
-                      itemCount: controller.products.length,
-                      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                        mainAxisExtent: 280,
-                        mainAxisSpacing: 20,
-                        maxCrossAxisExtent: 280,
-                        crossAxisSpacing: 10,
-                      ),
-                      itemBuilder: (context, index) {
-                        final product = controller.products[index];
+                return GridView.builder(
+                  itemCount: controller.products.length,
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                    mainAxisExtent: 280,
+                    mainAxisSpacing: 20,
+                    maxCrossAxisExtent: 280,
+                    crossAxisSpacing: 10,
+                  ),
+                  itemBuilder: (context, index) {
+                    final product = controller.products[index];
 
-                        return ProductItem(controller: controller, product: product);
-                      },
-                    );
+                    return ProductItem(controller: controller, product: product);
                   },
                 );
               },

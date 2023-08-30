@@ -1,9 +1,11 @@
 {
-  "flutterTools.getxDisplayContextMenu": false,
-  "flutterTools.mobxDisplayContextMenu": true,
   "cSpell.words": [
     "notfound"
   ],
-  "dart.flutterSdkPath": "C:\\Users\\Ricardo\\.puro\\envs\\version_3_10_6\\flutter",
-  "dart.sdkPath": "C:\\Users\\Ricardo\\.puro\\envs\\version_3_10_6\\flutter\\bin\\cache\\dart-sdk"
+  "dart.flutterSdkPath": "C:\\Users\\Ricardo\\.puro\\envs\\version_3_10\\flutter",
+  "dart.sdkPath": "C:\\Users\\Ricardo\\.puro\\envs\\version_3_10\\flutter\\bin\\cache\\dart-sdk",
+  "createFlutterWidgetsAndClasses.displayGetxContextMenu": false,
+  "createFlutterWidgetsAndClasses.displayMobxContextMenu": true,
+  "createFlutterWidgetsAndClasses.displayModularContextMenu": true,
+  "createFlutterWidgetsAndClasses.displayRiverpodContextMenu": false,
 }
